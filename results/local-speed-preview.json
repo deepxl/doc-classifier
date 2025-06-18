@@ -1,0 +1,40 @@
+{
+  "timestamp": "2025-06-18 11:47:42",
+  "test_type": "local_speed_preview",
+  "location": "MacBook to Vertex AI",
+  "avg_time_ms": 1544.1885232925415,
+  "estimated_gcp_time_ms": 1444.1885232925415,
+  "estimated_improvement_percent": 6.475893227517229,
+  "models_tested": [
+    "gemini-2.0-flash-lite",
+    "gemini-2.0-flash"
+  ],
+  "results": [
+    {
+      "model": "gemini-2.0-flash-lite",
+      "avg_time_ms": 1727.1918296813965,
+      "successful": 5,
+      "total": 5,
+      "times": [
+        2267.0161724090576,
+        1527.6610851287842,
+        1361.4840507507324,
+        2047.7607250213623,
+        1432.037115097046
+      ]
+    },
+    {
+      "model": "gemini-2.0-flash",
+      "avg_time_ms": 1361.1852169036865,
+      "successful": 5,
+      "total": 5,
+      "times": [
+        1611.8659973144531,
+        1245.622158050537,
+        1205.4338455200195,
+        1527.7891159057617,
+        1215.2149677276611
+      ]
+    }
+  ]
+}

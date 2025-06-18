@@ -1,0 +1,1064 @@
+{
+  "timestamp": "2025-06-18 10:28:48",
+  "test_description": "Optimized model comparison using detailed prompt + ultimate_speed parameters",
+  "configuration": {
+    "prompt_type": "detailed",
+    "parameter_set": "ultimate_speed",
+    "max_tokens": 50,
+    "structured_output": true
+  },
+  "ground_truth_file": "test-images/ground-truth.json",
+  "total_test_images": 23,
+  "models_tested": [
+    "gemini-2.0-flash_regular_api",
+    "gemini-2.0-flash-lite_regular_api",
+    "gemini-2.0-flash_vertex_ai",
+    "gemini-2.0-flash-lite_vertex_ai"
+  ],
+  "results": [
+    {
+      "model": "gemini-2.0-flash",
+      "configuration": "detailed_prompt_ultimate_speed",
+      "accuracy": 1.0,
+      "macro_precision": 1.0,
+      "macro_recall": 1.0,
+      "macro_f1": 1.0,
+      "correct_predictions": 23,
+      "total_predictions": 23,
+      "avg_processing_time_ms": 2006.4684411753778,
+      "avg_confidence": 0.9739130434782608,
+      "images_per_second": 0.4983881029368225,
+      "predictions": {
+        "id5.jpg": "id_card",
+        "ub1.pdf": "utility_bill",
+        "pass4.jpg": "passport",
+        "pass2.jpg": "passport",
+        "dl1.jpg": "driver_license",
+        "ub2.jpg": "utility_bill",
+        "dl2.jpg": "driver_license",
+        "id4.jpg": "id_card",
+        "id2.jpg": "id_card",
+        "pass1.jpg": "passport",
+        "pc2.jpg": "passport_card",
+        "pass3.jpg": "passport",
+        "id6.jpg": "id_card",
+        "id1.jpg": "id_card",
+        "dl3.jpg": "driver_license",
+        "pc1.jpg": "passport_card",
+        "ub3.pdf": "utility_bill",
+        "ps2.pdf": "paystub",
+        "id3.jpg": "id_card",
+        "bs1.pdf": "bank_statement",
+        "emp1.jpg": "employment_card",
+        "ps1.pdf": "paystub",
+        "gc1.jpg": "green_card"
+      },
+      "per_file_performance": {
+        "id5.jpg": {
+          "document_type": "id_card",
+          "confidence": 0.98,
+          "processing_time_ms": 1615.1151657104492,
+          "file_size_kb": 359.68
+        },
+        "ub1.pdf": {
+          "document_type": "utility_bill",
+          "confidence": 0.95,
+          "processing_time_ms": 1732.0477962493896,
+          "file_size_kb": 43.7
+        },
+        "pass4.jpg": {
+          "document_type": "passport",
+          "confidence": 0.95,
+          "processing_time_ms": 1780.623197555542,
+          "file_size_kb": 926.52
+        },
+        "pass2.jpg": {
+          "document_type": "passport",
+          "confidence": 0.98,
+          "processing_time_ms": 1816.382884979248,
+          "file_size_kb": 4463.39
+        },
+        "dl1.jpg": {
+          "document_type": "driver_license",
+          "confidence": 0.98,
+          "processing_time_ms": 1951.7900943756104,
+          "file_size_kb": 320.4
+        },
+        "ub2.jpg": {
+          "document_type": "utility_bill",
+          "confidence": 0.98,
+          "processing_time_ms": 1951.9319534301758,
+          "file_size_kb": 3357.22
+        },
+        "dl2.jpg": {
+          "document_type": "driver_license",
+          "confidence": 0.95,
+          "processing_time_ms": 1971.494197845459,
+          "file_size_kb": 101.46
+        },
+        "id4.jpg": {
+          "document_type": "id_card",
+          "confidence": 0.96,
+          "processing_time_ms": 1993.9379692077637,
+          "file_size_kb": 196.0
+        },
+        "id2.jpg": {
+          "document_type": "id_card",
+          "confidence": 0.98,
+          "processing_time_ms": 2022.0551490783691,
+          "file_size_kb": 3032.4
+        },
+        "pass1.jpg": {
+          "document_type": "passport",
+          "confidence": 0.98,
+          "processing_time_ms": 2024.2600440979004,
+          "file_size_kb": 752.79
+        },
+        "pc2.jpg": {
+          "document_type": "passport_card",
+          "confidence": 0.98,
+          "processing_time_ms": 2056.5130710601807,
+          "file_size_kb": 2676.8
+        },
+        "pass3.jpg": {
+          "document_type": "passport",
+          "confidence": 0.98,
+          "processing_time_ms": 2065.099000930786,
+          "file_size_kb": 2870.02
+        },
+        "id6.jpg": {
+          "document_type": "id_card",
+          "confidence": 0.98,
+          "processing_time_ms": 2089.9150371551514,
+          "file_size_kb": 1151.83
+        },
+        "id1.jpg": {
+          "document_type": "id_card",
+          "confidence": 0.98,
+          "processing_time_ms": 2175.4801273345947,
+          "file_size_kb": 617.6
+        },
+        "dl3.jpg": {
+          "document_type": "driver_license",
+          "confidence": 0.98,
+          "processing_time_ms": 2255.194902420044,
+          "file_size_kb": 280.31
+        },
+        "pc1.jpg": {
+          "document_type": "passport_card",
+          "confidence": 0.98,
+          "processing_time_ms": 2309.123754501343,
+          "file_size_kb": 392.41
+        },
+        "ub3.pdf": {
+          "document_type": "utility_bill",
+          "confidence": 0.95,
+          "processing_time_ms": 2393.85724067688,
+          "file_size_kb": 11869.59
+        },
+        "ps2.pdf": {
+          "document_type": "paystub",
+          "confidence": 0.98,
+          "processing_time_ms": 2416.563034057617,
+          "file_size_kb": 29.87
+        },
+        "id3.jpg": {
+          "document_type": "id_card",
+          "confidence": 0.98,
+          "processing_time_ms": 2454.2598724365234,
+          "file_size_kb": 4033.88
+        },
+        "bs1.pdf": {
+          "document_type": "bank_statement",
+          "confidence": 0.98,
+          "processing_time_ms": 2786.728858947754,
+          "file_size_kb": 525.38
+        },
+        "emp1.jpg": {
+          "document_type": "employment_card",
+          "confidence": 0.98,
+          "processing_time_ms": 1189.4867420196533,
+          "file_size_kb": 1433.94
+        },
+        "ps1.pdf": {
+          "document_type": "paystub",
+          "confidence": 0.98,
+          "processing_time_ms": 1528.6030769348145,
+          "file_size_kb": 4.26
+        },
+        "gc1.jpg": {
+          "document_type": "green_card",
+          "confidence": 0.98,
+          "processing_time_ms": 1568.3109760284424,
+          "file_size_kb": 2876.5
+        }
+      },
+      "category_metrics": {
+        "bank_statement": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1
+        },
+        "utility_bill": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "support": 3
+        },
+        "green_card": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1
+        },
+        "paystub": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "support": 2
+        },
+        "passport_card": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "support": 2
+        },
+        "employment_card": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1
+        },
+        "passport": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 4,
+          "fp": 0,
+          "fn": 0,
+          "support": 4
+        },
+        "driver_license": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "support": 3
+        },
+        "id_card": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0,
+          "support": 6
+        }
+      }
+    },
+    {
+      "model": "gemini-2.0-flash-lite",
+      "configuration": "detailed_prompt_ultimate_speed",
+      "accuracy": 1.0,
+      "macro_precision": 1.0,
+      "macro_recall": 1.0,
+      "macro_f1": 1.0,
+      "correct_predictions": 23,
+      "total_predictions": 23,
+      "avg_processing_time_ms": 1891.1432079646897,
+      "avg_confidence": 0.9552173913043478,
+      "images_per_second": 0.5287806845025939,
+      "predictions": {
+        "pc2.jpg": "passport_card",
+        "dl2.jpg": "driver_license",
+        "id3.jpg": "id_card",
+        "dl3.jpg": "driver_license",
+        "ub3.pdf": "utility_bill",
+        "id2.jpg": "id_card",
+        "id4.jpg": "id_card",
+        "pass3.jpg": "passport",
+        "pass2.jpg": "passport",
+        "pc1.jpg": "passport_card",
+        "ps2.pdf": "paystub",
+        "ub1.pdf": "utility_bill",
+        "id6.jpg": "id_card",
+        "dl1.jpg": "driver_license",
+        "id5.jpg": "id_card",
+        "ub2.jpg": "utility_bill",
+        "pass1.jpg": "passport",
+        "pass4.jpg": "passport",
+        "bs1.pdf": "bank_statement",
+        "id1.jpg": "id_card",
+        "ps1.pdf": "paystub",
+        "emp1.jpg": "employment_card",
+        "gc1.jpg": "green_card"
+      },
+      "per_file_performance": {
+        "pc2.jpg": {
+          "document_type": "passport_card",
+          "confidence": 0.95,
+          "processing_time_ms": 1514.0368938446045,
+          "file_size_kb": 2676.8
+        },
+        "dl2.jpg": {
+          "document_type": "driver_license",
+          "confidence": 0.95,
+          "processing_time_ms": 1587.8748893737793,
+          "file_size_kb": 101.46
+        },
+        "id3.jpg": {
+          "document_type": "id_card",
+          "confidence": 0.95,
+          "processing_time_ms": 1614.3381595611572,
+          "file_size_kb": 4033.88
+        },
+        "dl3.jpg": {
+          "document_type": "driver_license",
+          "confidence": 0.95,
+          "processing_time_ms": 1697.4799633026123,
+          "file_size_kb": 280.31
+        },
+        "ub3.pdf": {
+          "document_type": "utility_bill",
+          "confidence": 0.95,
+          "processing_time_ms": 1685.9230995178223,
+          "file_size_kb": 11869.59
+        },
+        "id2.jpg": {
+          "document_type": "id_card",
+          "confidence": 0.95,
+          "processing_time_ms": 1739.518165588379,
+          "file_size_kb": 3032.4
+        },
+        "id4.jpg": {
+          "document_type": "id_card",
+          "confidence": 0.95,
+          "processing_time_ms": 1749.6440410614014,
+          "file_size_kb": 196.0
+        },
+        "pass3.jpg": {
+          "document_type": "passport",
+          "confidence": 0.95,
+          "processing_time_ms": 1822.9267597198486,
+          "file_size_kb": 2870.02
+        },
+        "pass2.jpg": {
+          "document_type": "passport",
+          "confidence": 0.99,
+          "processing_time_ms": 1838.9949798583984,
+          "file_size_kb": 4463.39
+        },
+        "pc1.jpg": {
+          "document_type": "passport_card",
+          "confidence": 0.95,
+          "processing_time_ms": 1856.9309711456299,
+          "file_size_kb": 392.41
+        },
+        "ps2.pdf": {
+          "document_type": "paystub",
+          "confidence": 0.95,
+          "processing_time_ms": 1885.772943496704,
+          "file_size_kb": 29.87
+        },
+        "ub1.pdf": {
+          "document_type": "utility_bill",
+          "confidence": 0.99,
+          "processing_time_ms": 1919.2509651184082,
+          "file_size_kb": 43.7
+        },
+        "id6.jpg": {
+          "document_type": "id_card",
+          "confidence": 0.95,
+          "processing_time_ms": 1962.735891342163,
+          "file_size_kb": 1151.83
+        },
+        "dl1.jpg": {
+          "document_type": "driver_license",
+          "confidence": 0.95,
+          "processing_time_ms": 2022.615671157837,
+          "file_size_kb": 320.4
+        },
+        "id5.jpg": {
+          "document_type": "id_card",
+          "confidence": 0.95,
+          "processing_time_ms": 2039.5128726959229,
+          "file_size_kb": 359.68
+        },
+        "ub2.jpg": {
+          "document_type": "utility_bill",
+          "confidence": 0.95,
+          "processing_time_ms": 2037.2180938720703,
+          "file_size_kb": 3357.22
+        },
+        "pass1.jpg": {
+          "document_type": "passport",
+          "confidence": 0.99,
+          "processing_time_ms": 2077.676773071289,
+          "file_size_kb": 752.79
+        },
+        "pass4.jpg": {
+          "document_type": "passport",
+          "confidence": 0.95,
+          "processing_time_ms": 2413.908004760742,
+          "file_size_kb": 926.52
+        },
+        "bs1.pdf": {
+          "document_type": "bank_statement",
+          "confidence": 0.95,
+          "processing_time_ms": 2629.8611164093018,
+          "file_size_kb": 525.38
+        },
+        "id1.jpg": {
+          "document_type": "id_card",
+          "confidence": 0.95,
+          "processing_time_ms": 2724.9081134796143,
+          "file_size_kb": 617.6
+        },
+        "ps1.pdf": {
+          "document_type": "paystub",
+          "confidence": 0.95,
+          "processing_time_ms": 1437.7000331878662,
+          "file_size_kb": 4.26
+        },
+        "emp1.jpg": {
+          "document_type": "employment_card",
+          "confidence": 0.95,
+          "processing_time_ms": 1611.053705215454,
+          "file_size_kb": 1433.94
+        },
+        "gc1.jpg": {
+          "document_type": "green_card",
+          "confidence": 0.95,
+          "processing_time_ms": 1626.4116764068604,
+          "file_size_kb": 2876.5
+        }
+      },
+      "category_metrics": {
+        "bank_statement": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1
+        },
+        "utility_bill": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "support": 3
+        },
+        "green_card": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1
+        },
+        "paystub": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "support": 2
+        },
+        "passport_card": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "support": 2
+        },
+        "employment_card": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1
+        },
+        "passport": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 4,
+          "fp": 0,
+          "fn": 0,
+          "support": 4
+        },
+        "driver_license": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "support": 3
+        },
+        "id_card": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0,
+          "support": 6
+        }
+      }
+    },
+    {
+      "model": "gemini-2.0-flash",
+      "configuration": "detailed_prompt_ultimate_speed",
+      "accuracy": 1.0,
+      "macro_precision": 1.0,
+      "macro_recall": 1.0,
+      "macro_f1": 1.0,
+      "correct_predictions": 23,
+      "total_predictions": 23,
+      "avg_processing_time_ms": 2419.1283454065738,
+      "avg_confidence": 0.9813043478260869,
+      "images_per_second": 0.4133720320787419,
+      "predictions": {
+        "ub3.pdf": "utility_bill",
+        "pc2.jpg": "passport_card",
+        "dl1.jpg": "driver_license",
+        "dl2.jpg": "driver_license",
+        "pass3.jpg": "passport",
+        "id4.jpg": "id_card",
+        "pass2.jpg": "passport",
+        "id3.jpg": "id_card",
+        "pc1.jpg": "passport_card",
+        "ub2.jpg": "utility_bill",
+        "id2.jpg": "id_card",
+        "dl3.jpg": "driver_license",
+        "id5.jpg": "id_card",
+        "pass1.jpg": "passport",
+        "ps2.pdf": "paystub",
+        "pass4.jpg": "passport",
+        "ub1.pdf": "utility_bill",
+        "id1.jpg": "id_card",
+        "gc1.jpg": "green_card",
+        "emp1.jpg": "employment_card",
+        "ps1.pdf": "paystub",
+        "bs1.pdf": "bank_statement",
+        "id6.jpg": "id_card"
+      },
+      "per_file_performance": {
+        "ub3.pdf": {
+          "document_type": "utility_bill",
+          "confidence": 0.99,
+          "processing_time_ms": 1817.3191547393799,
+          "file_size_kb": 11869.59
+        },
+        "pc2.jpg": {
+          "document_type": "passport_card",
+          "confidence": 0.99,
+          "processing_time_ms": 2001.3179779052734,
+          "file_size_kb": 2676.8
+        },
+        "dl1.jpg": {
+          "document_type": "driver_license",
+          "confidence": 0.99,
+          "processing_time_ms": 2061.2568855285645,
+          "file_size_kb": 320.4
+        },
+        "dl2.jpg": {
+          "document_type": "driver_license",
+          "confidence": 0.99,
+          "processing_time_ms": 2063.8630390167236,
+          "file_size_kb": 101.46
+        },
+        "pass3.jpg": {
+          "document_type": "passport",
+          "confidence": 0.99,
+          "processing_time_ms": 2082.9319953918457,
+          "file_size_kb": 2870.02
+        },
+        "id4.jpg": {
+          "document_type": "id_card",
+          "confidence": 0.99,
+          "processing_time_ms": 2123.8081455230713,
+          "file_size_kb": 196.0
+        },
+        "pass2.jpg": {
+          "document_type": "passport",
+          "confidence": 0.99,
+          "processing_time_ms": 2160.2418422698975,
+          "file_size_kb": 4463.39
+        },
+        "id3.jpg": {
+          "document_type": "id_card",
+          "confidence": 0.99,
+          "processing_time_ms": 2196.0220336914062,
+          "file_size_kb": 4033.88
+        },
+        "pc1.jpg": {
+          "document_type": "passport_card",
+          "confidence": 0.99,
+          "processing_time_ms": 2197.126865386963,
+          "file_size_kb": 392.41
+        },
+        "ub2.jpg": {
+          "document_type": "utility_bill",
+          "confidence": 0.95,
+          "processing_time_ms": 2217.0920372009277,
+          "file_size_kb": 3357.22
+        },
+        "id2.jpg": {
+          "document_type": "id_card",
+          "confidence": 0.95,
+          "processing_time_ms": 2247.80011177063,
+          "file_size_kb": 3032.4
+        },
+        "dl3.jpg": {
+          "document_type": "driver_license",
+          "confidence": 0.99,
+          "processing_time_ms": 2353.8718223571777,
+          "file_size_kb": 280.31
+        },
+        "id5.jpg": {
+          "document_type": "id_card",
+          "confidence": 0.99,
+          "processing_time_ms": 2351.9721031188965,
+          "file_size_kb": 359.68
+        },
+        "pass1.jpg": {
+          "document_type": "passport",
+          "confidence": 0.99,
+          "processing_time_ms": 2453.906774520874,
+          "file_size_kb": 752.79
+        },
+        "ps2.pdf": {
+          "document_type": "paystub",
+          "confidence": 0.95,
+          "processing_time_ms": 2563.2340908050537,
+          "file_size_kb": 29.87
+        },
+        "pass4.jpg": {
+          "document_type": "passport",
+          "confidence": 0.99,
+          "processing_time_ms": 2652.0631313323975,
+          "file_size_kb": 926.52
+        },
+        "ub1.pdf": {
+          "document_type": "utility_bill",
+          "confidence": 0.95,
+          "processing_time_ms": 2655.3170680999756,
+          "file_size_kb": 43.7
+        },
+        "id1.jpg": {
+          "document_type": "id_card",
+          "confidence": 0.99,
+          "processing_time_ms": 3008.9921951293945,
+          "file_size_kb": 617.6
+        },
+        "gc1.jpg": {
+          "document_type": "green_card",
+          "confidence": 0.99,
+          "processing_time_ms": 1070.7030296325684,
+          "file_size_kb": 2876.5
+        },
+        "emp1.jpg": {
+          "document_type": "employment_card",
+          "confidence": 0.95,
+          "processing_time_ms": 1125.025749206543,
+          "file_size_kb": 1433.94
+        },
+        "ps1.pdf": {
+          "document_type": "paystub",
+          "confidence": 0.99,
+          "processing_time_ms": 1442.9700374603271,
+          "file_size_kb": 4.26
+        },
+        "bs1.pdf": {
+          "document_type": "bank_statement",
+          "confidence": 0.99,
+          "processing_time_ms": 3574.6569633483887,
+          "file_size_kb": 525.38
+        },
+        "id6.jpg": {
+          "document_type": "id_card",
+          "confidence": 0.99,
+          "processing_time_ms": 7218.458890914917,
+          "file_size_kb": 1151.83
+        }
+      },
+      "category_metrics": {
+        "bank_statement": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1
+        },
+        "utility_bill": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "support": 3
+        },
+        "green_card": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1
+        },
+        "paystub": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "support": 2
+        },
+        "passport_card": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "support": 2
+        },
+        "employment_card": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1
+        },
+        "passport": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 4,
+          "fp": 0,
+          "fn": 0,
+          "support": 4
+        },
+        "driver_license": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "support": 3
+        },
+        "id_card": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0,
+          "support": 6
+        }
+      }
+    },
+    {
+      "model": "gemini-2.0-flash-lite",
+      "configuration": "detailed_prompt_ultimate_speed",
+      "accuracy": 1.0,
+      "macro_precision": 1.0,
+      "macro_recall": 1.0,
+      "macro_f1": 1.0,
+      "correct_predictions": 23,
+      "total_predictions": 23,
+      "avg_processing_time_ms": 2306.817666344021,
+      "avg_confidence": 0.9565217391304347,
+      "images_per_second": 0.43349763381379786,
+      "predictions": {
+        "pc2.jpg": "passport_card",
+        "pass3.jpg": "passport",
+        "id4.jpg": "id_card",
+        "id3.jpg": "id_card",
+        "ub3.pdf": "utility_bill",
+        "id5.jpg": "id_card",
+        "ps2.pdf": "paystub",
+        "pc1.jpg": "passport_card",
+        "ub1.pdf": "utility_bill",
+        "id6.jpg": "id_card",
+        "id1.jpg": "id_card",
+        "dl1.jpg": "driver_license",
+        "dl2.jpg": "driver_license",
+        "dl3.jpg": "driver_license",
+        "pass2.jpg": "passport",
+        "ub2.jpg": "utility_bill",
+        "pass1.jpg": "passport",
+        "id2.jpg": "id_card",
+        "pass4.jpg": "passport",
+        "emp1.jpg": "employment_card",
+        "ps1.pdf": "paystub",
+        "gc1.jpg": "green_card",
+        "bs1.pdf": "bank_statement"
+      },
+      "per_file_performance": {
+        "pc2.jpg": {
+          "document_type": "passport_card",
+          "confidence": 0.95,
+          "processing_time_ms": 1536.618709564209,
+          "file_size_kb": 2676.8
+        },
+        "pass3.jpg": {
+          "document_type": "passport",
+          "confidence": 0.95,
+          "processing_time_ms": 1885.3979110717773,
+          "file_size_kb": 2870.02
+        },
+        "id4.jpg": {
+          "document_type": "id_card",
+          "confidence": 0.95,
+          "processing_time_ms": 2130.8488845825195,
+          "file_size_kb": 196.0
+        },
+        "id3.jpg": {
+          "document_type": "id_card",
+          "confidence": 0.95,
+          "processing_time_ms": 2250.717878341675,
+          "file_size_kb": 4033.88
+        },
+        "ub3.pdf": {
+          "document_type": "utility_bill",
+          "confidence": 0.95,
+          "processing_time_ms": 2246.6349601745605,
+          "file_size_kb": 11869.59
+        },
+        "id5.jpg": {
+          "document_type": "id_card",
+          "confidence": 0.95,
+          "processing_time_ms": 2277.8491973876953,
+          "file_size_kb": 359.68
+        },
+        "ps2.pdf": {
+          "document_type": "paystub",
+          "confidence": 1.0,
+          "processing_time_ms": 2342.7371978759766,
+          "file_size_kb": 29.87
+        },
+        "pc1.jpg": {
+          "document_type": "passport_card",
+          "confidence": 0.95,
+          "processing_time_ms": 2367.2549724578857,
+          "file_size_kb": 392.41
+        },
+        "ub1.pdf": {
+          "document_type": "utility_bill",
+          "confidence": 1.0,
+          "processing_time_ms": 2410.8331203460693,
+          "file_size_kb": 43.7
+        },
+        "id6.jpg": {
+          "document_type": "id_card",
+          "confidence": 0.95,
+          "processing_time_ms": 2458.4920406341553,
+          "file_size_kb": 1151.83
+        },
+        "id1.jpg": {
+          "document_type": "id_card",
+          "confidence": 0.95,
+          "processing_time_ms": 2493.112087249756,
+          "file_size_kb": 617.6
+        },
+        "dl1.jpg": {
+          "document_type": "driver_license",
+          "confidence": 0.95,
+          "processing_time_ms": 2505.0199031829834,
+          "file_size_kb": 320.4
+        },
+        "dl2.jpg": {
+          "document_type": "driver_license",
+          "confidence": 0.95,
+          "processing_time_ms": 2540.4977798461914,
+          "file_size_kb": 101.46
+        },
+        "dl3.jpg": {
+          "document_type": "driver_license",
+          "confidence": 0.95,
+          "processing_time_ms": 2535.529136657715,
+          "file_size_kb": 280.31
+        },
+        "pass2.jpg": {
+          "document_type": "passport",
+          "confidence": 0.95,
+          "processing_time_ms": 2553.905248641968,
+          "file_size_kb": 4463.39
+        },
+        "ub2.jpg": {
+          "document_type": "utility_bill",
+          "confidence": 0.95,
+          "processing_time_ms": 2519.8891162872314,
+          "file_size_kb": 3357.22
+        },
+        "pass1.jpg": {
+          "document_type": "passport",
+          "confidence": 0.95,
+          "processing_time_ms": 2561.444044113159,
+          "file_size_kb": 752.79
+        },
+        "id2.jpg": {
+          "document_type": "id_card",
+          "confidence": 0.95,
+          "processing_time_ms": 2548.218250274658,
+          "file_size_kb": 3032.4
+        },
+        "pass4.jpg": {
+          "document_type": "passport",
+          "confidence": 0.95,
+          "processing_time_ms": 2561.7730617523193,
+          "file_size_kb": 926.52
+        },
+        "emp1.jpg": {
+          "document_type": "employment_card",
+          "confidence": 0.95,
+          "processing_time_ms": 1153.0921459197998,
+          "file_size_kb": 1433.94
+        },
+        "ps1.pdf": {
+          "document_type": "paystub",
+          "confidence": 1.0,
+          "processing_time_ms": 1638.8437747955322,
+          "file_size_kb": 4.26
+        },
+        "gc1.jpg": {
+          "document_type": "green_card",
+          "confidence": 0.95,
+          "processing_time_ms": 1401.1731147766113,
+          "file_size_kb": 2876.5
+        },
+        "bs1.pdf": {
+          "document_type": "bank_statement",
+          "confidence": 0.95,
+          "processing_time_ms": 4136.923789978027,
+          "file_size_kb": 525.38
+        }
+      },
+      "category_metrics": {
+        "bank_statement": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1
+        },
+        "utility_bill": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "support": 3
+        },
+        "green_card": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1
+        },
+        "paystub": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "support": 2
+        },
+        "passport_card": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "support": 2
+        },
+        "employment_card": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1
+        },
+        "passport": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 4,
+          "fp": 0,
+          "fn": 0,
+          "support": 4
+        },
+        "driver_license": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "support": 3
+        },
+        "id_card": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0,
+          "support": 6
+        }
+      }
+    }
+  ]
+}

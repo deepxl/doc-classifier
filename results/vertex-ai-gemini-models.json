@@ -1,0 +1,231 @@
+{
+  "timestamp": "2025-06-18 08:30:58",
+  "platform": "vertex_ai",
+  "project": "deepxl-backend",
+  "location": "us-central1",
+  "test_image": "/Users/geirmjosund/Development/DeepXL/GEIR/gemini-classifier/test-images/dl2.jpg",
+  "models_tested": [
+    "gemini-1.5-flash",
+    "gemini-1.5-pro",
+    "gemini-2.0-flash",
+    "gemini-2.0-flash-lite",
+    "gemini-2.5-flash",
+    "gemini-2.5-flash-lite",
+    "gemini-2.5-pro"
+  ],
+  "available_models": [
+    "gemini-1.5-flash",
+    "gemini-1.5-pro",
+    "gemini-2.0-flash",
+    "gemini-2.0-flash-lite",
+    "gemini-2.5-flash",
+    "gemini-2.5-flash-lite",
+    "gemini-2.5-pro"
+  ],
+  "unavailable_models": [],
+  "results": [
+    {
+      "model": "gemini-1.5-flash",
+      "platform": "vertex_ai",
+      "available": true,
+      "results": [
+        {
+          "config": "standard_low_tokens",
+          "success": false,
+          "error": "404 Publisher Model `projects/deepxl-backend/locations/us-central1/publishers/google/models/gemini-1.5-flash` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions",
+          "error_type": "NotFound"
+        },
+        {
+          "config": "high_tokens_for_thinking",
+          "success": false,
+          "error": "404 Publisher Model `projects/deepxl-backend/locations/us-central1/publishers/google/models/gemini-1.5-flash` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions",
+          "error_type": "NotFound"
+        }
+      ],
+      "best_result": null
+    },
+    {
+      "model": "gemini-1.5-pro",
+      "platform": "vertex_ai",
+      "available": true,
+      "results": [
+        {
+          "config": "standard_low_tokens",
+          "success": false,
+          "error": "404 Publisher Model `projects/deepxl-backend/locations/us-central1/publishers/google/models/gemini-1.5-pro` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions",
+          "error_type": "NotFound"
+        },
+        {
+          "config": "high_tokens_for_thinking",
+          "success": false,
+          "error": "404 Publisher Model `projects/deepxl-backend/locations/us-central1/publishers/google/models/gemini-1.5-pro` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions",
+          "error_type": "NotFound"
+        }
+      ],
+      "best_result": null
+    },
+    {
+      "model": "gemini-2.0-flash",
+      "platform": "vertex_ai",
+      "available": true,
+      "results": [
+        {
+          "config": "standard_low_tokens",
+          "success": true,
+          "processing_time_ms": 1470.8070755004883,
+          "response": {
+            "document_type": "parsing_failed",
+            "confidence": 0.0,
+            "raw_response": "driver_license"
+          },
+          "response_length": 14,
+          "has_thinking": false
+        },
+        {
+          "config": "high_tokens_for_thinking",
+          "success": true,
+          "processing_time_ms": 878.0031204223633,
+          "response": {
+            "document_type": "parsing_failed",
+            "confidence": 0.0,
+            "raw_response": "driver_license"
+          },
+          "response_length": 14,
+          "has_thinking": false
+        }
+      ],
+      "best_result": {
+        "config": "high_tokens_for_thinking",
+        "success": true,
+        "processing_time_ms": 878.0031204223633,
+        "response": {
+          "document_type": "parsing_failed",
+          "confidence": 0.0,
+          "raw_response": "driver_license"
+        },
+        "response_length": 14,
+        "has_thinking": false
+      }
+    },
+    {
+      "model": "gemini-2.0-flash-lite",
+      "platform": "vertex_ai",
+      "available": true,
+      "results": [
+        {
+          "config": "standard_low_tokens",
+          "success": true,
+          "processing_time_ms": 1498.2049465179443,
+          "response": {
+            "document_type": "parsing_failed",
+            "confidence": 0.0,
+            "raw_response": "driver_license\n"
+          },
+          "response_length": 15,
+          "has_thinking": false
+        },
+        {
+          "config": "high_tokens_for_thinking",
+          "success": true,
+          "processing_time_ms": 1225.48508644104,
+          "response": {
+            "document_type": "parsing_failed",
+            "confidence": 0.0,
+            "raw_response": "driver_license\n"
+          },
+          "response_length": 15,
+          "has_thinking": false
+        }
+      ],
+      "best_result": {
+        "config": "high_tokens_for_thinking",
+        "success": true,
+        "processing_time_ms": 1225.48508644104,
+        "response": {
+          "document_type": "parsing_failed",
+          "confidence": 0.0,
+          "raw_response": "driver_license\n"
+        },
+        "response_length": 15,
+        "has_thinking": false
+      }
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "platform": "vertex_ai",
+      "available": true,
+      "results": [
+        {
+          "config": "standard_low_tokens",
+          "success": false,
+          "error": "Cannot get the response text.\nCannot get the Candidate text.\nResponse candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.\nContent:\n{\n  \"role\": \"model\"\n}\nCandidate:\n{\n  \"content\": {\n    \"role\": \"model\"\n  },\n  \"finish_reason\": \"MAX_TOKENS\"\n}\nResponse:\n{\n  \"candidates\": [\n    {\n      \"content\": {\n        \"role\": \"model\"\n      },\n      \"finish_reason\": \"MAX_TOKENS\"\n    }\n  ],\n  \"usage_metadata\": {\n    \"prompt_token_count\": 1330,\n    \"total_token_count\": 1379\n  },\n  \"model_version\": \"gemini-2.5-flash\"\n}",
+          "error_type": "ValueError"
+        },
+        {
+          "config": "high_tokens_for_thinking",
+          "success": true,
+          "processing_time_ms": 3585.745096206665,
+          "response": {
+            "document_type": "parsing_failed",
+            "confidence": 0.0,
+            "raw_response": "driver_license"
+          },
+          "response_length": 14,
+          "has_thinking": false
+        }
+      ],
+      "best_result": {
+        "config": "high_tokens_for_thinking",
+        "success": true,
+        "processing_time_ms": 3585.745096206665,
+        "response": {
+          "document_type": "parsing_failed",
+          "confidence": 0.0,
+          "raw_response": "driver_license"
+        },
+        "response_length": 14,
+        "has_thinking": false
+      }
+    },
+    {
+      "model": "gemini-2.5-flash-lite",
+      "platform": "vertex_ai",
+      "available": true,
+      "results": [
+        {
+          "config": "standard_low_tokens",
+          "success": false,
+          "error": "404 Publisher Model `projects/deepxl-backend/locations/us-central1/publishers/google/models/gemini-2.5-flash-lite` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions",
+          "error_type": "NotFound"
+        },
+        {
+          "config": "high_tokens_for_thinking",
+          "success": false,
+          "error": "404 Publisher Model `projects/deepxl-backend/locations/us-central1/publishers/google/models/gemini-2.5-flash-lite` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions",
+          "error_type": "NotFound"
+        }
+      ],
+      "best_result": null
+    },
+    {
+      "model": "gemini-2.5-pro",
+      "platform": "vertex_ai",
+      "available": true,
+      "results": [
+        {
+          "config": "standard_low_tokens",
+          "success": false,
+          "error": "Cannot get the response text.\nCannot get the Candidate text.\nResponse candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.\nContent:\n{\n  \"role\": \"model\"\n}\nCandidate:\n{\n  \"content\": {\n    \"role\": \"model\"\n  },\n  \"finish_reason\": \"MAX_TOKENS\"\n}\nResponse:\n{\n  \"candidates\": [\n    {\n      \"content\": {\n        \"role\": \"model\"\n      },\n      \"finish_reason\": \"MAX_TOKENS\"\n    }\n  ],\n  \"usage_metadata\": {\n    \"prompt_token_count\": 1330,\n    \"total_token_count\": 1379\n  },\n  \"model_version\": \"gemini-2.5-pro\"\n}",
+          "error_type": "ValueError"
+        },
+        {
+          "config": "high_tokens_for_thinking",
+          "success": false,
+          "error": "Cannot get the response text.\nCannot get the Candidate text.\nResponse candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.\nContent:\n{\n  \"role\": \"model\"\n}\nCandidate:\n{\n  \"content\": {\n    \"role\": \"model\"\n  },\n  \"finish_reason\": \"MAX_TOKENS\"\n}\nResponse:\n{\n  \"candidates\": [\n    {\n      \"content\": {\n        \"role\": \"model\"\n      },\n      \"finish_reason\": \"MAX_TOKENS\"\n    }\n  ],\n  \"usage_metadata\": {\n    \"prompt_token_count\": 1330,\n    \"total_token_count\": 1829\n  },\n  \"model_version\": \"gemini-2.5-pro\"\n}",
+          "error_type": "ValueError"
+        }
+      ],
+      "best_result": null
+    }
+  ]
+}

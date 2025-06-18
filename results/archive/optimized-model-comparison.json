@@ -1,0 +1,388 @@
+{
+  "timestamp": "2025-06-17 15:24:34",
+  "test_description": "Optimized model comparison using detailed prompt + ultimate_speed parameters",
+  "configuration": {
+    "prompt_type": "detailed",
+    "parameter_set": "ultimate_speed",
+    "max_tokens": 50,
+    "structured_output": true
+  },
+  "ground_truth_file": "test-images/ground-truth.json",
+  "total_test_images": 22,
+  "models_tested": [
+    "gemini-2.0-flash",
+    "gemini-2.0-flash-lite",
+    "gemini-2.5-flash-preview-05-20"
+  ],
+  "results": [
+    {
+      "model": "gemini-2.0-flash",
+      "configuration": "detailed_prompt_ultimate_speed",
+      "accuracy": 1.0,
+      "macro_precision": 1.0,
+      "macro_recall": 1.0,
+      "macro_f1": 1.0,
+      "correct_predictions": 22,
+      "total_predictions": 22,
+      "avg_processing_time_ms": 3319.8113224723124,
+      "avg_confidence": 0.9736363636363636,
+      "images_per_second": 0.3012219378947371,
+      "predictions": {
+        "dl1.jpg": "driver_license",
+        "id4.jpg": "id_card",
+        "ps1.pdf": "paystub",
+        "ps2.pdf": "paystub",
+        "dl2.jpg": "driver_license",
+        "ub1.pdf": "utility_bill",
+        "id1.jpg": "id_card",
+        "dl3.jpg": "driver_license",
+        "pc1.jpg": "passport_card",
+        "id5.jpg": "id_card",
+        "bs1.pdf": "bank_statement",
+        "pass1.jpg": "passport",
+        "pass4.jpg": "passport",
+        "id6.jpg": "id_card",
+        "emp1.jpg": "employment_card",
+        "pc2.jpg": "passport_card",
+        "pass3.jpg": "passport",
+        "ub2.jpg": "utility_bill",
+        "id3.jpg": "id_card",
+        "id2.jpg": "id_card",
+        "gc1.jpg": "green_card",
+        "pass2.jpg": "passport"
+      },
+      "category_metrics": {
+        "passport": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 4,
+          "fp": 0,
+          "fn": 0,
+          "support": 4
+        },
+        "employment_card": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1
+        },
+        "bank_statement": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1
+        },
+        "passport_card": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "support": 2
+        },
+        "utility_bill": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "support": 2
+        },
+        "paystub": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "support": 2
+        },
+        "green_card": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1
+        },
+        "driver_license": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "support": 3
+        },
+        "id_card": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0,
+          "support": 6
+        }
+      }
+    },
+    {
+      "model": "gemini-2.0-flash-lite",
+      "configuration": "detailed_prompt_ultimate_speed",
+      "accuracy": 1.0,
+      "macro_precision": 1.0,
+      "macro_recall": 1.0,
+      "macro_f1": 1.0,
+      "correct_predictions": 22,
+      "total_predictions": 22,
+      "avg_processing_time_ms": 3673.854329369285,
+      "avg_confidence": 0.9663636363636363,
+      "images_per_second": 0.27219369913658953,
+      "predictions": {
+        "pass1.jpg": "passport",
+        "dl1.jpg": "driver_license",
+        "pc1.jpg": "passport_card",
+        "ub1.pdf": "utility_bill",
+        "id4.jpg": "id_card",
+        "ps1.pdf": "paystub",
+        "dl2.jpg": "driver_license",
+        "dl3.jpg": "driver_license",
+        "ps2.pdf": "paystub",
+        "id5.jpg": "id_card",
+        "id6.jpg": "id_card",
+        "id1.jpg": "id_card",
+        "pass3.jpg": "passport",
+        "bs1.pdf": "bank_statement",
+        "pass4.jpg": "passport",
+        "pass2.jpg": "passport",
+        "pc2.jpg": "passport_card",
+        "emp1.jpg": "employment_card",
+        "ub2.jpg": "utility_bill",
+        "id2.jpg": "id_card",
+        "gc1.jpg": "green_card",
+        "id3.jpg": "id_card"
+      },
+      "category_metrics": {
+        "passport": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 4,
+          "fp": 0,
+          "fn": 0,
+          "support": 4
+        },
+        "employment_card": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1
+        },
+        "bank_statement": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1
+        },
+        "passport_card": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "support": 2
+        },
+        "utility_bill": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "support": 2
+        },
+        "paystub": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "support": 2
+        },
+        "green_card": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "support": 1
+        },
+        "driver_license": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "support": 3
+        },
+        "id_card": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0,
+          "support": 6
+        }
+      }
+    },
+    {
+      "model": "gemini-2.5-flash-preview-05-20",
+      "configuration": "detailed_prompt_ultimate_speed",
+      "accuracy": 0.0,
+      "macro_precision": 0.0,
+      "macro_recall": 0.0,
+      "macro_f1": 0,
+      "correct_predictions": 0,
+      "total_predictions": 22,
+      "avg_processing_time_ms": 3957.8911824659867,
+      "avg_confidence": 0.0,
+      "images_per_second": 0.2526598013685016,
+      "predictions": {
+        "dl1.jpg": "other",
+        "pass1.jpg": "other",
+        "pc1.jpg": "other",
+        "id4.jpg": "other",
+        "id1.jpg": "other",
+        "dl2.jpg": "other",
+        "id5.jpg": "other",
+        "dl3.jpg": "other",
+        "pass4.jpg": "other",
+        "pass2.jpg": "other",
+        "ps1.pdf": "other",
+        "id6.jpg": "other",
+        "ub1.pdf": "other",
+        "ps2.pdf": "other",
+        "pass3.jpg": "other",
+        "bs1.pdf": "other",
+        "emp1.jpg": "other",
+        "pc2.jpg": "other",
+        "gc1.jpg": "other",
+        "id3.jpg": "other",
+        "id2.jpg": "other",
+        "ub2.jpg": "other"
+      },
+      "category_metrics": {
+        "passport": {
+          "precision": 0,
+          "recall": 0.0,
+          "f1": 0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 4,
+          "support": 4
+        },
+        "employment_card": {
+          "precision": 0,
+          "recall": 0.0,
+          "f1": 0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "support": 1
+        },
+        "bank_statement": {
+          "precision": 0,
+          "recall": 0.0,
+          "f1": 0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "support": 1
+        },
+        "passport_card": {
+          "precision": 0,
+          "recall": 0.0,
+          "f1": 0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 2,
+          "support": 2
+        },
+        "utility_bill": {
+          "precision": 0,
+          "recall": 0.0,
+          "f1": 0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 2,
+          "support": 2
+        },
+        "paystub": {
+          "precision": 0,
+          "recall": 0.0,
+          "f1": 0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 2,
+          "support": 2
+        },
+        "green_card": {
+          "precision": 0,
+          "recall": 0.0,
+          "f1": 0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "support": 1
+        },
+        "other": {
+          "precision": 0.0,
+          "recall": 0,
+          "f1": 0,
+          "tp": 0,
+          "fp": 22,
+          "fn": 0,
+          "support": 0
+        },
+        "driver_license": {
+          "precision": 0,
+          "recall": 0.0,
+          "f1": 0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 3,
+          "support": 3
+        },
+        "id_card": {
+          "precision": 0,
+          "recall": 0.0,
+          "f1": 0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 6,
+          "support": 6
+        }
+      }
+    }
+  ]
+}

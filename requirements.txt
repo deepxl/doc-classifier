@@ -1,0 +1,11 @@
+google-generativeai==0.8.3
+google-cloud-aiplatform==1.38.1
+python-dotenv==1.0.1
+requests==2.31.0
+Pillow
+pdf2image
+
+# FastAPI dependencies (for web API deployment)
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-multipart==0.0.6
