@@ -4,7 +4,7 @@ import os
 import time
 import json
 import base64
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple, Union, Any
 from dataclasses import dataclass
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import google.generativeai as genai
@@ -333,7 +333,8 @@ class UltraFastDocumentClassifier:
 
     def get_supported_categories(self) -> List[str]:
         """Get list of supported document categories"""
-        return list(SUPPORTED_MODELS.keys())
+        from src.config.categories import DOCUMENT_CATEGORIES
+        return DOCUMENT_CATEGORIES
 
     def change_model(self, new_model: str) -> bool:
         """
@@ -366,6 +367,78 @@ class UltraFastDocumentClassifier:
         self.prompt_type = new_prompt_type
         self.prompt = PROMPTS.get(new_prompt_type, PROMPTS["detailed"])
         print(f"✅ Changed to prompt: {new_prompt_type}")
+
+    def classify_content(self, content: Union[str, bytes, Dict[str, Any], Image.Image]) -> Optional[ClassificationResult]:
+        """
+        Classify document from preprocessed content (base64, bytes, dict, or PIL Image)
+        
+        Args:
+            content: Preprocessed content in various formats:
+                    - str: base64 encoded image
+                    - bytes: image data
+                    - dict: {'content_type': 'image', 'format': 'base64', 'data': '...', 'metadata': {...}}
+                    - PIL.Image: Image object
+        """
+        start_time = time.time()
+        inference_id = f"gemini_{int(time.time() * 1000)}"
+
+        try:
+            # Convert content to format suitable for Gemini API
+            image_content = self._prepare_content(content)
+
+            response = self.model_instance.generate_content(
+                [self.prompt, image_content],
+                generation_config=self.generation_config,
+            )
+
+            if not response.parts:
+                return None
+
+            # Handle both regular JSON responses and thinking responses
+            result_json = self._parse_response_text(response.text)
+
+            # Validate response
+            if not validate_schema_response(result_json):
+                raise ValueError("Response does not match the required schema.")
+
+            processing_time = (time.time() - start_time) * 1000
+
+            return ClassificationResult(
+                document_type=result_json.get("document_type", "other"),
+                confidence=result_json.get("confidence", 0.0),
+                processing_time_ms=processing_time,
+                model_used=self.model,
+                inference_id=inference_id,
+            )
+
+        except Exception as e:
+            processing_time = (time.time() - start_time) * 1000
+            print(f"Classification error for content: {e}")
+            return None
+
+    def _prepare_content(self, content: Union[str, bytes, Dict[str, Any], Image.Image]) -> Dict[str, Any]:
+        """Convert various content formats to Gemini API format"""
+        if isinstance(content, dict):
+            # Handle structured content like {'content_type': 'image', 'format': 'base64', 'data': '...'}
+            if content.get('format') == 'base64':
+                data = base64.b64decode(content['data'])
+                return {"mime_type": "image/jpeg", "data": data}
+            elif 'data' in content:
+                return {"mime_type": "image/jpeg", "data": content['data']}
+        elif isinstance(content, str):
+            # Assume base64 encoded image
+            data = base64.b64decode(content)
+            return {"mime_type": "image/jpeg", "data": data}
+        elif isinstance(content, bytes):
+            # Raw image bytes
+            return {"mime_type": "image/jpeg", "data": content}
+        elif hasattr(content, 'save'):  # PIL Image
+            img_byte_arr = io.BytesIO()
+            content.save(img_byte_arr, format="JPEG", quality=85)
+            img_byte_arr.seek(0)
+            return {"mime_type": "image/jpeg", "data": img_byte_arr.read()}
+        else:
+            raise ValueError(f"Unsupported content type: {type(content)}")
 
 
 def main():

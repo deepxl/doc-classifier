@@ -23,9 +23,9 @@ load_dotenv(project_root / ".env.local")
 class DocumentProcessingResult:
     """Complete document processing result"""
 
-    # File information
-    file_path: str
-    file_name: str
+    # Document information
+    document_id: str
+    document_name: str
 
     # Classification results
     classification: ClassificationResult
@@ -45,11 +45,13 @@ class DocumentProcessingPipeline:
     """
     End-to-end document processing pipeline
     Classification → Parsing → Results
+    
+    Designed to work with preprocessed content (preprocessing handled externally)
     """
 
     def __init__(
         self,
-        classifier_model: str = "detailed",
+        classifier_model: str = "gemini-2.0-flash",
         classifier_prompt: str = "detailed",
         classifier_params: str = "optimal",
     ):
@@ -57,7 +59,7 @@ class DocumentProcessingPipeline:
         Initialize the processing pipeline
 
         Args:
-            classifier_model: Model configuration for classification
+            classifier_model: Model name for classification
             classifier_prompt: Prompt type for classification
             classifier_params: Parameter set for classification
         """
@@ -65,7 +67,6 @@ class DocumentProcessingPipeline:
         self.classifier = UltraFastDocumentClassifier(
             model=classifier_model,
             prompt_type=classifier_prompt,
-            parameter_set=classifier_params,
         )
 
         # Your parser integration point
@@ -82,13 +83,19 @@ class DocumentProcessingPipeline:
         print("✅ Parser integrated successfully")
 
     def process_single_document(
-        self, file_path: str, parse_document: bool = True
+        self, 
+        content: Union[str, bytes, Dict[str, Any]], 
+        document_id: str = None,
+        document_name: str = None,
+        parse_document: bool = True
     ) -> DocumentProcessingResult:
         """
         Process a single document through the complete pipeline
 
         Args:
-            file_path: Path to document file
+            content: Preprocessed document content (base64 image, text, or content dict)
+            document_id: Unique identifier for the document
+            document_name: Human-readable name for the document
             parse_document: Whether to run parsing step
 
         Returns:
@@ -96,13 +103,19 @@ class DocumentProcessingPipeline:
         """
         start_time = time.time()
         pipeline_id = f"pipeline_{int(time.time() * 1000)}"
-        file_path_obj = Path(file_path)
+        
+        # Set defaults if not provided
+        if document_id is None:
+            document_id = f"doc_{int(time.time() * 1000)}"
+        if document_name is None:
+            document_name = document_id
 
         # Step 1: Classification
-        print(f"📋 Classifying: {file_path_obj.name}")
-        classification_result = self.classifier.classify_single(file_path)
-
-        if not classification_result:
+        print(f"📋 Classifying: {document_name}")
+        
+        try:
+            classification_result = self.classifier.classify_content(content)
+        except Exception as e:
             # Create a dummy classification result for failed cases
             dummy_classification = ClassificationResult(
                 document_type="unknown",
@@ -112,8 +125,8 @@ class DocumentProcessingPipeline:
                 inference_id="failed",
             )
             return DocumentProcessingResult(
-                file_path=file_path,
-                file_name=file_path_obj.name,
+                document_id=document_id,
+                document_name=document_name,
                 classification=dummy_classification,
                 total_processing_time_ms=(time.time() - start_time) * 1000,
                 pipeline_id=pipeline_id,
@@ -125,8 +138,8 @@ class DocumentProcessingPipeline:
 
         # Initialize result
         result = DocumentProcessingResult(
-            file_path=file_path,
-            file_name=file_path_obj.name,
+            document_id=document_id,
+            document_name=document_name,
             classification=classification_result,
             pipeline_id=pipeline_id,
         )
@@ -139,7 +152,7 @@ class DocumentProcessingPipeline:
             try:
                 # Call your parser with classification context
                 parsed_data = self._call_parser(
-                    file_path=str(file_path),
+                    content=content,
                     document_type=classification_result.document_type,
                     confidence=classification_result.confidence,
                 )
@@ -165,13 +178,16 @@ class DocumentProcessingPipeline:
         return result
 
     def _call_parser(
-        self, file_path: str, document_type: str, confidence: float
+        self, 
+        content: Union[str, bytes, Dict[str, Any]], 
+        document_type: str, 
+        confidence: float
     ) -> Dict[str, Any]:
         """
         Call your parser with classification context
 
         Args:
-            file_path: Path to document
+            content: Preprocessed document content
             document_type: Classified document type
             confidence: Classification confidence
 
@@ -182,14 +198,14 @@ class DocumentProcessingPipeline:
         # Example integration patterns:
 
         if self.parser and hasattr(self.parser, "parse_document"):
-            # Method 1: Direct parsing with context
+            # Method 1: Direct parsing with context (parser takes preprocessed content)
             return self.parser.parse_document(
-                file_path=file_path, document_type=document_type, confidence=confidence
+                content=content, document_type=document_type, confidence=confidence
             )
 
         elif self.parser and hasattr(self.parser, "parse"):
-            # Method 2: Simple parsing call
-            return self.parser.parse(file_path)
+            # Method 2: Simple parsing call (parser takes preprocessed content)
+            return self.parser.parse(content)
 
         else:
             # Method 3: Custom integration
@@ -197,7 +213,7 @@ class DocumentProcessingPipeline:
 
     def process_batch(
         self,
-        file_paths: List[str],
+        documents: List[Dict[str, Any]],
         parse_documents: bool = True,
         max_workers: Optional[int] = None,
     ) -> List[DocumentProcessingResult]:
@@ -205,19 +221,25 @@ class DocumentProcessingPipeline:
         Process multiple documents through the pipeline
 
         Args:
-            file_paths: List of document file paths
+            documents: List of document dictionaries with keys:
+                      - 'content': Preprocessed document content
+                      - 'document_id': (optional) Unique identifier
+                      - 'document_name': (optional) Human-readable name
             parse_documents: Whether to run parsing step
-            max_workers: Number of parallel workers
+            max_workers: Number of parallel workers (future enhancement)
 
         Returns:
             List of processing results
         """
-        print(f"🚀 Processing {len(file_paths)} documents...")
+        print(f"🚀 Processing {len(documents)} documents...")
 
         results = []
-        for file_path in file_paths:
+        for doc in documents:
             result = self.process_single_document(
-                file_path=file_path, parse_document=parse_documents
+                content=doc['content'],
+                document_id=doc.get('document_id'),
+                document_name=doc.get('document_name'),
+                parse_document=parse_documents
             )
             results.append(result)
 
@@ -321,40 +343,33 @@ def main():
     # Initialize pipeline
     pipeline = DocumentProcessingPipeline()
 
-    # Find test documents
-    import glob
+    # Example usage with preprocessed content
+    example_documents = [
+        {
+            'content': 'base64_encoded_image_data_here',  # Replace with actual preprocessed content
+            'document_id': 'doc_001',
+            'document_name': 'sample_passport.jpg'
+        },
+        {
+            'content': 'another_base64_encoded_image_data',  # Replace with actual preprocessed content
+            'document_id': 'doc_002', 
+            'document_name': 'sample_license.jpg'
+        }
+    ]
 
-    test_files = (
-        glob.glob("test-images/*.jpg")
-        + glob.glob("test-images/*.jpeg")
-        + glob.glob("test-images/*.png")
-        + glob.glob("test-images/*.pdf")
-    )
-
-    if not test_files:
-        print("❌ No test files found")
-        return
-
-    test_files = test_files[:3]  # Test with first 3 files
-    print(f"🔍 Testing with {len(test_files)} files")
+    print(f"🔍 Testing with {len(example_documents)} example documents")
+    print("📝 Note: Replace example_documents with your actual preprocessed content")
 
     # Process without parsing (parser not integrated yet)
-    results = pipeline.process_batch(
-        file_paths=test_files,
-        parse_documents=False,  # Set to True when parser is integrated
-    )
+    # Uncomment when you have actual preprocessed content:
+    # results = pipeline.process_batch(
+    #     documents=example_documents,
+    #     parse_documents=False,  # Set to True when parser is integrated
+    # )
 
-    # Show results
-    stats = pipeline.get_pipeline_stats(results)
-    print(f"\n📊 Pipeline Statistics:")
-    for key, value in stats.items():
-        if isinstance(value, float):
-            print(f"  {key}: {value:.2f}")
-        else:
-            print(f"  {key}: {value}")
-
-    # Export results
-    pipeline.export_results(results, "results/pipeline-test-results.json")
+    # Show stats example
+    print(f"\n📊 Pipeline ready for your preprocessed content!")
+    print(f"💡 Usage: pipeline.process_batch(documents=your_preprocessed_docs)")
 
 
 if __name__ == "__main__":

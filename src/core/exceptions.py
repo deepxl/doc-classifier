@@ -9,10 +9,7 @@ class DocumentProcessingError(Exception):
     pass
 
 
-class PreprocessingError(DocumentProcessingError):
-    """Raised when document preprocessing fails"""
 
-    pass
 
 
 class ClassificationError(DocumentProcessingError):

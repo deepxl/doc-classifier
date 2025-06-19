@@ -36,11 +36,7 @@ class Settings:
     MAX_FILE_SIZE_MB: int = int(os.getenv("MAX_FILE_SIZE_MB", "50"))
     SUPPORTED_FORMATS: List[str] = ["jpg", "jpeg", "png", "pdf"]
 
-    # Image Optimization
-    IMAGE_RESIZE_THRESHOLD_KB: int = int(os.getenv("IMAGE_RESIZE_THRESHOLD_KB", "1000"))
-    IMAGE_RESIZE_DIMENSION: int = int(os.getenv("IMAGE_RESIZE_DIMENSION", "1024"))
-    IMAGE_QUALITY: int = int(os.getenv("IMAGE_QUALITY", "80"))
-    PDF_DPI: int = int(os.getenv("PDF_DPI", "150"))
+
 
     # Logging
     LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO")

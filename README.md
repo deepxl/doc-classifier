@@ -1,6 +1,6 @@
 # 🚀 Gemini Document Classifier
 
-An enterprise-grade document classification system built on Google's Gemini models, optimized for speed and accuracy.
+A high-performance document classification **component library** built on Google's Gemini models, designed for integration into your FastAPI applications.
 
 ## 🎯 Project Goals
 
@@ -43,48 +43,52 @@ touch .env.local
 echo "GEMINI_API_KEY=your_gemini_api_key" > .env.local
 ```
 
-### 2. Run Model Comparison Test
+### 2. Test the Component
 
-The primary script in this project, `scripts/test-models.py`, runs a comprehensive performance comparison of key Gemini models using a pre-defined optimal configuration.
+```python
+# Initialize the classifier
+from src.core.document_classifier import UltraFastDocumentClassifier
 
-```bash
-# Run the test from the root directory
-python3.11 scripts/test-models.py
+classifier = UltraFastDocumentClassifier(
+    model="gemini-2.0-flash",
+    prompt_type="detailed"
+)
+
+# Option 1: Classify from file path
+result = classifier.classify_single("path/to/document.jpg")
+
+# Option 2: Classify from preprocessed content (NEW!)
+preprocessed_content = {
+    'content_type': 'image',
+    'format': 'base64', 
+    'data': your_base64_data,
+    'metadata': {'original_size': '1024x768'}
+}
+result = classifier.classify_content(preprocessed_content)
+
+print(f"Document type: {result.document_type}")
+print(f"Confidence: {result.confidence:.2%}")
 ```
-
-The script will:
-
-- Load the ground truth data from `test-images/ground-truth.json`.
-- Test a suite of Gemini 2.0 Flash models.
-- Calculate and display detailed metrics: accuracy, F1-score, speed, and confidence.
-- Provide a "champion" model recommendation based on the results.
-- Save a detailed report to `results/optimized-model-comparison.json`.
 
 ## 📁 Project Structure
 
 ```
 gemini-classifier/
-├── src/
-│   ├── config/               # Modular configuration system
+├── src/                      # 🔧 Core library code
+│   ├── config/               # Configuration system
 │   │   ├── models.py         # Model definitions and parameters
 │   │   ├── prompts.py        # Prompt templates
 │   │   ├── categories.py     # Document type definitions
 │   │   └── structured_output.py # JSON output schemas
-│   └── core/
-│       ├── document_classifier.py # Main classification engine
-│       └── document_pipeline.py   # Integrated pipeline (classification + parsing)
-├── scripts/
-│   ├── test-models.py        # Comprehensive model performance test script
-│   └── integrate-parser-example.py # Parser integration example
-├── test-images/
-│   ├── ground-truth.json     # Ground truth labels for test images
-│   └── ...                   # Test images (.jpg, .pdf)
-├── results/
-│   └── archive/              # Archive of past test results
-├── docs/                     # Project documentation
-├── requirements.txt          # Python dependencies
-├── .env.local                # Local environment variables (API keys)
-└── README.md                 # This file
+│   ├── core/                 # Main classifiers
+│   │   ├── document_classifier.py # Primary classification engine
+│   │   ├── vertex_ai_document_classifier.py # Vertex AI classifier
+│   │   └── document_pipeline.py # Classification + parsing pipeline
+│   └── models/               # Supporting models
+├── setup.py                  # 📦 Package installation
+├── requirements.txt          # Development dependencies
+├── README.md                 # This documentation
+└── .gitignore               # Version control
 ```
 
 ## 🔧 Configuration
@@ -98,7 +102,7 @@ The classifier's behavior is controlled by a set of configuration files in `src/
 
 ### Using the Classifier in Your Code
 
-You can easily integrate the `UltraFastDocumentClassifier` into your own applications.
+You can easily integrate the `DocumentClassifier` into your own applications.
 
 ```python
 from src.core.document_classifier import UltraFastDocumentClassifier
@@ -107,40 +111,58 @@ from dotenv import load_dotenv
 # Load environment variables from .env.local
 load_dotenv()
 
-# Initialize with default (optimal) settings
-classifier = UltraFastDocumentClassifier()
+# Initialize with optimal settings
+classifier = UltraFastDocumentClassifier(
+    model="gemini-2.0-flash",
+    prompt_type="detailed"
+)
 
-# Classify a single document
-# Ensure the image path is correct
-image_path = "test-images/pass1.jpg"
-result = classifier.classify_single(image_path)
+# Option 1: Classify from file path
+result = classifier.classify_single("path/to/document.jpg")
+
+# Option 2: Classify preprocessed content (preprocessing handled in your main project)
+result = classifier.classify_content(your_preprocessed_content)
 
 if result:
-    print(f"Document: {image_path}")
     print(f"Type: {result.document_type} (Confidence: {result.confidence:.2%})")
     print(f"Time: {result.processing_time_ms:.0f}ms")
-
 ```
 
 ## 🔗 Parser Integration
 
 To integrate your existing parser with the classification system, you can use the `DocumentProcessingPipeline`:
 
-### 1. Basic Integration
+### 1. Pipeline Integration
 
 ```python
 from src.core.document_pipeline import DocumentProcessingPipeline
 
 # Initialize the pipeline
-pipeline = DocumentProcessingPipeline()
+pipeline = DocumentProcessingPipeline(
+    classifier_model="gemini-2.0-flash",
+    classifier_prompt="detailed"
+)
 
 # Integrate your parser (replace with your actual parser)
 your_parser = YourExistingParser()
 pipeline.set_parser(your_parser)
 
-# Process documents through the complete pipeline
+# Process documents with preprocessed content
+documents = [
+    {
+        'content': your_preprocessed_content_1,
+        'document_id': 'doc_001',
+        'document_name': 'passport.jpg'
+    },
+    {
+        'content': your_preprocessed_content_2,
+        'document_id': 'doc_002', 
+        'document_name': 'license.jpg'
+    }
+]
+
 results = pipeline.process_batch(
-    file_paths=["document1.pdf", "document2.jpg"],
+    documents=documents,
     parse_documents=True
 )
 
@@ -149,92 +171,95 @@ stats = pipeline.get_pipeline_stats(results)
 print(f"Success rate: {stats['parsing_success_rate']:.1f}%")
 ```
 
-### 2. Parser Interface Requirements
+### 2. Parser Interface
 
-Your parser should implement one of these interfaces:
+Your parser should work with preprocessed content:
 
-**Option A: Context-aware parsing**
+**Context-aware parsing (recommended)**
 
 ```python
 class YourParser:
-    def parse_document(self, file_path: str, document_type: str, confidence: float):
+    def parse_document(self, content, document_type: str, confidence: float):
         # Use document_type to apply type-specific parsing logic
+        # content is your preprocessed document content
         return {"field1": "value1", "field2": "value2"}
 ```
 
-**Option B: Simple parsing**
+**Simple parsing**
 
 ```python
 class YourParser:
-    def parse(self, file_path: str):
+    def parse(self, content):
         # Simple parsing without classification context
+        # content is your preprocessed document content
         return {"field1": "value1", "field2": "value2"}
 ```
 
-### 3. Test Integration
+## 🔧 Installation & Integration
+
+This is a **component library** designed to be integrated into your existing FastAPI applications.
+
+### 1. Install as Package
 
 ```bash
-# Run the integration example
-python3.11 scripts/integrate-parser-example.py
+# Install from source
+git clone https://github.com/deepxl/doc-classifier.git
+cd doc-classifier
+pip install -e .
+
+# Or install with FastAPI extras
+pip install -e ".[fastapi]"
 ```
 
-This will show you exactly how to connect your parser and test the complete pipeline.
-
-## 🌐 FastAPI Deployment
-
-For production web API deployment, use the optimized FastAPI processor with multiple preprocessing strategies:
-
-### 1. Quick Start
-
-```bash
-# Install FastAPI dependencies
-pip install fastapi uvicorn python-multipart
-
-# Run the example server
-python3.11 scripts/fastapi-example.py
-```
-
-### 2. FastAPI Integration
+### 2. Basic Integration
 
 ```python
-from src.core.fastapi_document_processor import create_fastapi_processor
+from src.core.document_classifier import UltraFastDocumentClassifier
 
-# Create processor with adaptive strategy (recommended)
-processor = create_fastapi_processor(
-    preprocessing_strategy="adaptive",
-    confidence_threshold=0.8
+# Initialize the classifier
+classifier = UltraFastDocumentClassifier(
+    model="gemini-2.0-flash",
+    prompt_type="detailed"
 )
 
-# Add your parser
-processor.set_parser(your_parser_instance)
+# Classify from file path or preprocessed content
+result = classifier.classify_single("path/to/document.jpg")  # File path
+# OR
+result = classifier.classify_content(preprocessed_content)   # Preprocessed content
 
-# Process documents asynchronously
-result = await processor.process_document_async(
-    file_content=file_bytes,
-    filename="document.pdf",
-    parse_document=True
-)
+print(f"Type: {result.document_type}, Confidence: {result.confidence}")
 ```
 
-### 3. Preprocessing Strategies
+### 3. FastAPI Integration
 
-Choose the optimal strategy for your use case:
+For FastAPI integration, use the classifier in your routes:
 
-- **Adaptive** (Recommended): Smart preprocessing based on classification confidence - 20-30% faster than dual
-- **Parallel**: Concurrent preprocessing for maximum throughput on multi-core systems
-- **Dual**: Your current approach - separate preprocessing for classification and parsing
-- **Single High**: Single high-quality preprocessing when parsing accuracy is critical
+```python
+from fastapi import FastAPI, UploadFile, File
+from src.core.document_classifier import UltraFastDocumentClassifier
 
-See [docs/preprocessing-strategies.md](docs/preprocessing-strategies.md) for detailed comparison and performance benchmarks.
+app = FastAPI()
+classifier = UltraFastDocumentClassifier()
 
-### 4. API Endpoints
-
-The FastAPI server provides:
-
-- `POST /process-document/` - Process single document with strategy selection
-- `POST /batch-process/` - Process multiple documents in batch
-- `GET /strategies/` - View available preprocessing strategies and current config
-- `GET /docs` - Interactive API documentation
+@app.post("/classify/")
+async def classify_document(file: UploadFile = File(...)):
+    # Option 1: Save temporarily and classify from path
+    temp_path = f"/tmp/{file.filename}"
+    with open(temp_path, "wb") as buffer:
+        content = await file.read()
+        buffer.write(content)
+    result = classifier.classify_single(temp_path)
+    
+    # Option 2: Classify directly from uploaded content
+    # content = await file.read()
+    # result = classifier.classify_content(content)
+    
+    return {
+        "document_type": result.document_type,
+        "confidence": result.confidence,
+        "processing_time_ms": result.processing_time_ms
+    }
+```
 
 ## 💡 Key Optimizations & Insights
 
@@ -245,6 +270,33 @@ This project is the result of extensive testing and optimization. The key findin
 - **Structured Output is Essential**: Using Gemini's native structured output is significantly faster and more reliable than parsing raw text.
 - **Optimal Parameters**: A `temperature` of `0.0` and `top_p` of `0.01` (`optimal` set in `models.py`) provides the most consistent and accurate results.
 
+## 📋 Project Status
+
+**Version 1.1.0** - Enhanced Component Library ✅
+
+This project is a **comprehensive, production-ready component library** for document classification in FastAPI applications.
+
+**Key Features:**
+
+- 📦 **Ultra-Clean Structure** - Minimal files, no preprocessing or development artifacts
+- 🚀 **Dual Input Support** - Works with both file paths AND preprocessed content
+- ⚡ **Optimized Performance** - Ultra-fast classification (<400ms per document)
+- 🔧 **Easy Integration** - Simple import and usage in existing projects
+- 🎯 **Focused Categories** - Supports 11 core document types including identity, financial, and business documents
+- 🔄 **Flexible Content Formats** - Accepts base64, bytes, PIL Images, and structured dictionaries
+
+**Installation:**
+
+```bash
+# Core library
+pip install -e .
+
+# With FastAPI extras
+pip install -e ".[fastapi]"
+```
+
+**Supported Document Types:** 11 core categories including passport, driver_license, bank_statement, utility_bill, employment_card, and more.
+
 ---
 
-_This project is focused on providing a clean, powerful, and highly-optimized baseline for document classification tasks._
+_A clean, minimal component for production document classification._

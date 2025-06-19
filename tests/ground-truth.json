@@ -1,0 +1,34 @@
+{
+  "ground_truth": {
+    "tests/docs/pass1.jpg": {
+      "expected_type": "passport",
+      "description": "Passport document - test image 1",
+      "confidence_threshold": 0.8
+    },
+    "tests/docs/pass2.jpg": {
+      "expected_type": "passport", 
+      "description": "Passport document - test image 2",
+      "confidence_threshold": 0.8
+    },
+    "tests/docs/dl1.jpg": {
+      "expected_type": "driver_license",
+      "description": "Driver license document - test image 1", 
+      "confidence_threshold": 0.8
+    },
+    "tests/docs/dl2.jpg": {
+      "expected_type": "driver_license",
+      "description": "Driver license document - test image 2",
+      "confidence_threshold": 0.8
+    }
+  },
+  "metadata": {
+    "created_date": "2024-06-19",
+    "total_documents": 4,
+    "document_types": {
+      "passport": 2,
+      "driver_license": 2
+    },
+    "version": "1.0.0",
+    "notes": "Ground truth for basic document classification testing"
+  }
+} 
