@@ -1,7 +1,7 @@
 #!/usr/bin/env python3.11
 """
 Setup configuration for Gemini Document Classifier
-A high-performance document classification component using Google's Gemini models
+A focused, high-performance document classification component using Google's Gemini models
 """
 
 from setuptools import setup, find_packages
@@ -13,10 +13,10 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
     name="gemini-document-classifier",
-    version="1.1.0",
+    version="1.2.0",
     author="DeepXL",
     author_email="admin-geir@deepxl-backend.iam.gserviceaccount.com",
-    description="High-performance document classification using Google Gemini models",
+    description="Focused, high-performance document classification using Google Gemini models",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/deepxl/doc-classifier",

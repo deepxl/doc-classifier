@@ -5,7 +5,6 @@ import time
 import json
 import re
 from typing import Dict, List, Optional
-from dataclasses import dataclass
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from PIL import Image
@@ -30,17 +29,8 @@ PROJECT_ID = os.getenv("GCP_PROJECT_ID", "deepxl-backend")
 LOCATION = os.getenv("GCP_REGION", "us-central1")
 vertexai.init(project=PROJECT_ID, location=LOCATION)
 
-
-@dataclass
-class ClassificationResult:
-    """Document classification result with metadata"""
-
-    document_type: str
-    confidence: float
-    processing_time_ms: float
-    model_used: str
-    inference_id: str
-
+# Shared dataclass
+from src.core.types import ClassificationResult
 
 class VertexAIDocumentClassifier:
     """

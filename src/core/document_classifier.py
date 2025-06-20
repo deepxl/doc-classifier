@@ -5,7 +5,6 @@ import time
 import json
 import base64
 from typing import Dict, List, Optional, Tuple, Union, Any
-from dataclasses import dataclass
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import google.generativeai as genai
 from dotenv import load_dotenv
@@ -30,17 +29,8 @@ load_dotenv(project_root / ".env.local")
 os.environ["GRPC_ENABLE_FORK_SUPPORT"] = "0"
 os.environ["GRPC_POLL_STRATEGY"] = "poll"
 
-
-@dataclass
-class ClassificationResult:
-    """Document classification result with metadata"""
-
-    document_type: str
-    confidence: float
-    processing_time_ms: float
-    model_used: str
-    inference_id: str
-
+# Shared dataclass definitions
+from src.core.types import ClassificationResult
 
 class UltraFastDocumentClassifier:
     """
